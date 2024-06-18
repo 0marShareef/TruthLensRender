@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthLens Fact-Checking</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blinkTextCursor {
+            from {
+                border-right-color: rgba(0, 0, 0, 0);
+            }
+
+            to {
+                border-right-color: transparent;
+            }
+        }
+
+        .typewriter-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid black;
+            animation: blinkTextCursor .75s step-end infinite;
+            font-size: 2rem;
+            /* Bigger font size */
+            font-weight: bold;
+            /* Bolder font */
+            line-height: 1.5;
+            /* Adjust line height */
+            color: white;
+        }
+
+        .border-gradient-purple {
+            border-image: linear-gradient(45deg, purple, blue) 1;
+            border-width: 4px;
+        }
+
+        .shadow-custom {
+            box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+
+<body style="
+    background: linear-gradient(45deg, rgb(223, 105, 105), rgb(85, 12, 194));
+" class="flex flex-col items-center justify-center min-h-screen">
+    <div class="mb-8 text-xl text-white">
+        <span class="typewriter-text" id="typewriter"></span>
+    </div>
+    <div class="flex items-center space-x-4 p-4 border-gradient-purple shadow-custom rounded-md bg-white">
+        <form action="/submit" method="post" enctype="multipart/form-data" class="flex items-center space-x-4">
+            <label for="image-upload" class="cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-500 hover:text-gray-700"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm3 5a3 3 0 116 0 3 3 0 01-6 0zm7 8H6a1 1 0 01-1-1v-1.586l2.707-2.707a1 1 0 011.414 0L12 14.414l1.879-1.88a1 1 0 011.414 0L16 13.414V15a1 1 0 01-1 1z" />
+                </svg>
+            </label>
+            <input id="image-upload" type="file" name="file" accept="image/*" class="hidden">
+            <input type="text" name="url" placeholder="Enter URL..."
+                class="border border-transparent rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent flex-grow">
+            <button type="submit"
+                class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Fact
+                Check</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const typewriterTexts = [
+                "Fact-check YouTube videos!",
+                "Fact-check news articles!",
+                "Fact-check image posts!"
+            ];
+            let currentIndex = 0;
+            let currentCharIndex = 0;
+            const typewriterElement = document.getElementById('typewriter');
+            let isDeleting = false;
+            let delay = 3000; // 3 seconds delay
+
+            function type() {
+                const currentText = typewriterTexts[currentIndex];
+                typewriterElement.textContent = currentText.substring(0, currentCharIndex);
+
+                if (isDeleting) {
+                    if (currentCharIndex > 0) {
+                        currentCharIndex--;
+                        setTimeout(type, 50);
+                    } else {
+                        isDeleting = false;
+                        currentIndex = (currentIndex + 1) % typewriterTexts.length;
+                        setTimeout(type, 500);
+                    }
+                } else {
+                    if (currentCharIndex < currentText.length) {
+                        currentCharIndex++;
+                        setTimeout(type, 100);
+                    } else {
+                        isDeleting = true;
+                        setTimeout(type, delay);
+                    }
+                }
+            }
+
+            type();
+        });
+    </script>
+</body>
+
+</html>

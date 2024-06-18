@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fact Check Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-text {
+            background: linear-gradient(45deg, #8A2BE2, #DA70D6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            border: 4px solid;
+            border-image-slice: 1;
+            border-width: 4px;
+            border-image-source: linear-gradient(45deg, #8A2BE2, #DA70D6);
+        }
+
+        .result-heading {
+            margin-bottom: 1rem;
+            /* Adjust this value as needed */
+            line-height: 1.5;
+            /* Adjust line height to ensure enough space for descenders */
+        }
+
+        .result-container {
+            padding-top: 2rem;
+            /* Increase padding to ensure enough space */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-8 px-4">
+        <h1 class="text-3xl font-bold gradient-text result-heading">Here is your result!</h1>
+        <div class="bg-white rounded-lg shadow-md p-6 gradient-border result-container">
+            <!-- Display your fact-checked result here -->
+            <div id="result" class="text-lg text-gray-800"></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const resultText = `{{ query_result|safe }}`; // Ensure Jinja2 output is safe for rendering
+
+            // Replace "**" with HTML <strong> tags
+            const formattedResult = resultText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            // Split the result into paragraphs based on double line breaks
+            const paragraphs = formattedResult.split(/\n\s*\n/);
+
+            // Display each paragraph in a <p> tag
+            const finalResult = paragraphs.map(paragraph => `<p>${paragraph}</p>`).join('');
+
+            document.getElementById('result').innerHTML = finalResult;
+        });
+    </script>
+</body>
+
+</html>

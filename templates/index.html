@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthLens - AI Powered Fact-Checking</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: black;
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hover-underline:hover::after {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+
+        .feature-card {
+            border-image: linear-gradient(45deg, #6a11cb, #2575fc) 1;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-card {
+            border-image: linear-gradient(45deg, #6a11cb, #2575fc) 1;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <nav class="w-full flex justify-center py-5 bg-white">
+        <ul class="flex space-x-10">
+            <li><a href="#features" class="text-gray-800 font-bold relative hover-underline">Features</a></li>
+            <li><a href="#mission" class="text-gray-800 font-bold relative hover-underline">Mission</a></li>
+            <li><a href="#pricing" class="text-gray-800 font-bold relative hover-underline">Pricing</a></li>
+        </ul>
+    </nav>
+
+    <div class="flex flex-col justify-center items-center h-screen text-center p-5">
+        <h1 class="text-6xl font-bold text-gray-800 mb-5">Solving the world's biggest problem with <span
+                class="gradient-text">TruthLens</span></h1>
+        <p class="text-xl text-gray-600 mb-5">Your AI-powered companion for accurate and reliable fact-checking.</p>
+        <button onclick="location.href='/fact_check'"
+            class="px-5 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors">Get Started</button>
+    </div>
+
+    <section id="features" class="flex flex-col justify-center items-center h-screen p-10 bg-white text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-10">Features</h2>
+        <div class="grid grid-cols-2 gap-5 w-4/5 max-w-screen-lg">
+            <div
+                class="bg-white border-4 border-transparent rounded-xl p-10 shadow-md flex flex-col items-center justify-center text-center feature-card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Real-time Fact-checking</h3>
+                <p class="text-xl text-gray-600">Get instant verification of information as you browse.</p>
+            </div>
+            <div
+                class="bg-white border-4 border-transparent rounded-xl p-10 shadow-md flex flex-col items-center justify-center text-center feature-card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Multi-media Fact-checking</h3>
+                <p class="text-xl text-gray-600">Fact-check YouTube videos, news articles, and image posts.</p>
+            </div>
+            <div
+                class="bg-white border-4 border-transparent rounded-xl p-10 shadow-md flex flex-col items-center justify-center text-center feature-card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">User-friendly Interface</h3>
+                <p class="text-xl text-gray-600">Enjoy a seamless and intuitive user experience.</p>
+            </div>
+            <div
+                class="bg-white border-4 border-transparent rounded-xl p-10 shadow-md flex flex-col items-center justify-center text-center feature-card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Secure and Private</h3>
+                <p class="text-xl text-gray-600">Your data is protected with top-notch security measures.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="flex items-center h-screen bg-white p-10">
+        <div class="w-1/2 p-5">
+            <h2 class="text-4xl font-bold text-gray-800 mb-5">Our Mission</h2>
+            <p class="text-xl text-gray-600 mb-5">
+                At TruthLens, our mission is to combat misinformation and disinformation. In today's digital age, false
+                information can spread rapidly, causing significant harm to individuals and society. Our AI-powered
+                tools are designed to provide accurate and reliable fact-checking, helping users discern the truth from
+                falsehood.
+            </p>
+            <p class="text-xl text-gray-600">
+                According to the World Economic Forum's Global Risk Report, misinformation and disinformation are among
+                the biggest risks facing the world today. We aim to tackle this challenge head-on, empowering users with
+                the information they need to make informed decisions and contribute to a well-informed public discourse.
+            </p>
+        </div>
+        <div class="w-1/2 p-5 shadow-md">
+            <img src="static/images/risks.jpg" alt="Global Risk Report Graphic">
+        </div>
+    </section>
+
+    <section id="pricing" class="flex flex-col items-center p-10 mt-20 mb-20 bg-white text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-5">Transparent Pricing Plans</h2>
+        <p class="text-xl text-gray-600 mb-10">Explore our straightforward pricing plans tailored to meet your
+            fact-checking needs. Choose the plan that suits you best.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-4/5 max-w-screen-lg">
+            <!-- Free Plan -->
+            <div
+                class="bg-white border-2 border-gray-200 rounded-lg p-8 shadow-md flex flex-col items-center pricing-card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Free Plan</h3>
+                <p class="text-3xl font-bold text-gray-800 mb-4">Free</p>
+                <ul class="text-gray-600 mb-4">
+                    <li class="mb-2">5 free requests</li>
+                    <li class="mb-2">x</li>
+                    <li class="mb-2">x</li>
+                </ul>
+                <button class="px-5 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors">Get
+                    Started</button>
+                <button
+                    class="px-5 py-2 text-blue-600 bg-white border border-blue-600 rounded-md hover:bg-blue-50 transition-colors mt-2">Learn
+                    More</button>
+            </div>
+            <!-- Basic Plan -->
+            <div
+                class="bg-white border-2 border-gray-200 rounded-lg p-8 shadow-md flex flex-col items-center relative pricing-card">
+                <span class="absolute top-0 -mt-6 bg-blue-600 text-white px-4 py-1 rounded-full text-sm">Most
+                    Popular</span>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Basic Plan</h3>
+                <p class="text-3xl font-bold text-gray-800 mb-4">$5/month</p>
+                <ul class="text-gray-600 mb-4">
+                    <li class="mb-2">100 requests per month</li>
+                    <li class="mb-2">200,000 tokens per month</li>
+                    <li class="mb-2">Standard support</li>
+                </ul>
+                <button class="px-5 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors">Get
+                    Started</button>
+                <button
+                    class="px-5 py-2 text-blue-600 bg-white border border-blue-600 rounded-md hover:bg-blue-50 transition-colors mt-2">Learn
+                    More</button>
+            </div>
+            <!-- Pro Plan -->
+            <div
+                class="bg-white border-2 border-gray-200 rounded-lg p-8 shadow-md flex flex-col items-center pricing-card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Pro Plan</h3>
+                <p class="text-3xl font-bold text-gray-800 mb-4">$10/month</p>
+                <ul class="text-gray-600 mb-4">
+                    <li class="mb-2">500 requests per month</li>
+                    <li class="mb-2">1,000,000 tokens per month</li>
+                    <li class="mb-2">Priority support</li>
+                </ul>
+                <button class="px-5 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors">Get
+                    Started</button>
+                <button
+                    class="px-5 py-2 text-blue-600 bg-white border border-blue-600 rounded-md hover:bg-blue-50 transition-colors mt-2">Learn
+                    More</button>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
