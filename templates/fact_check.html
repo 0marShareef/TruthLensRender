@@ -33,13 +33,16 @@
             white-space: nowrap;
             border-right: .15em solid black;
             animation: blinkTextCursor .75s step-end infinite;
-            font-size: 2rem;
-            /* Bigger font size */
+            font-size: 1.25rem;
             font-weight: bold;
-            /* Bolder font */
             line-height: 1.5;
-            /* Adjust line height */
             color: white;
+        }
+
+        @media (min-width: 640px) {
+            .typewriter-text {
+                font-size: 2rem;
+            }
         }
 
         .border-gradient-purple {
@@ -53,27 +56,29 @@
     </style>
 </head>
 
-<body style="
-    background: linear-gradient(45deg, rgb(223, 105, 105), rgb(85, 12, 194));
-" class="flex flex-col items-center justify-center min-h-screen">
-    <div class="mb-8 text-xl text-white">
+<body style="background: linear-gradient(45deg, rgb(223, 105, 105), rgb(85, 12, 194));"
+    class="flex flex-col items-center justify-center min-h-screen p-4">
+    <div class="mb-8 text-xl text-white text-center">
         <span class="typewriter-text" id="typewriter"></span>
     </div>
-    <div class="flex items-center space-x-4 p-4 border-gradient-purple shadow-custom rounded-md bg-white">
-        <form action="/submit" method="post" enctype="multipart/form-data" class="flex items-center space-x-4">
-            <label for="image-upload" class="cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-500 hover:text-gray-700"
-                    viewBox="0 0 20 20" fill="currentColor">
-                    <path
-                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm3 5a3 3 0 116 0 3 3 0 01-6 0zm7 8H6a1 1 0 01-1-1v-1.586l2.707-2.707a1 1 0 011.414 0L12 14.414l1.879-1.88a1 1 0 011.414 0L16 13.414V15a1 1 0 01-1 1z" />
-                </svg>
-            </label>
-            <input id="image-upload" type="file" name="file" accept="image/*" class="hidden">
-            <input type="text" name="url" placeholder="Enter URL..."
-                class="border border-transparent rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent flex-grow">
+    <div class="w-full max-w-md border-gradient-purple shadow-custom rounded-md bg-white p-4">
+        <form action="/submit" method="post" enctype="multipart/form-data" class="flex flex-col space-y-4">
+            <div class="flex items-center justify-between">
+                <label for="image-upload" class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-500 hover:text-gray-700"
+                        viewBox="0 0 20 20" fill="currentColor">
+                        <path
+                            d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm3 5a3 3 0 116 0 3 3 0 01-6 0zm7 8H6a1 1 0 01-1-1v-1.586l2.707-2.707a1 1 0 011.414 0L12 14.414l1.879-1.88a1 1 0 011.414 0L16 13.414V15a1 1 0 01-1 1z" />
+                    </svg>
+                </label>
+                <input id="image-upload" type="file" name="file" accept="image/*" class="hidden">
+                <input type="text" name="url" placeholder="Enter URL..."
+                    class="border border-transparent rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent flex-grow">
+            </div>
             <button type="submit"
-                class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Fact
-                Check</button>
+                class="w-full bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Fact Check
+            </button>
         </form>
     </div>
     <script>

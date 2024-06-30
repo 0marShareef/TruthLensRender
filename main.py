@@ -12,17 +12,18 @@ import PIL.Image
 import io
 import os
 import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 # OpenAI configuration
-YOUR_API_KEY = "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"
-client = OpenAI(api_key=YOUR_API_KEY, base_url="https://api.perplexity.ai")
+client = OpenAI(api_key=os.environ['YOUR_API_KEY'], base_url="https://api.perplexity.ai")
 
 # Google Generative AI configuration
-os.environ['GOOGLE_API_KEY'] = "AIzaSyB6wn3odWjs3JjVjjikMhL5fr-8rKyd_WA"
 genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
 model = genai.GenerativeModel('gemini-pro-vision')
 
@@ -89,16 +90,16 @@ async def submit(request: Request, url: str = Form(None), file: UploadFile = Fil
             ''', image])
         text = response.text
 
-    # Send the text to OpenAI Perplexity model for fact-checking
-    prompt = f'''I will provide you with news related stories or topics and you will 
+    # Send the text to Perplexity model for fact-checking
+    prompt = f'''I will provide you with news related stories or topics or discussions among people and you will 
                                 critically assess the accuracy of the information. 
                                 Verify EVERY SINGLE statement, do not skip anything.
                                 You should use your own experiences, 
                                 thoughtfully explain why something is important, back up claims with facts, 
                                 and provide the correct information for any inaccuracies presented in the given information. 
-                                The format of your response should be as follows: "Statement 1: ..., 
+                                The format of your response should be STRICTLY as follows: "Statement 1: ..., 
                                 Verdict:(overall accuracy level along with explanation) ... and so on, 
-                                (And at the end of the response) Sources links: ...:\n\n{text}'''
+                                (And at the end of the response) Overall Accuracy: (percentage), Sources links(STRICTLY NECESSARY): ...:\n\n{text}'''
     messages = [
         {
             "role": "system",

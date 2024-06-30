@@ -22,38 +22,75 @@
 
         .result-heading {
             margin-bottom: 1rem;
-            /* Adjust this value as needed */
-            line-height: 1.5;
-            /* Adjust line height to ensure enough space for descenders */
+            line-height: 1.2;
+            font-size: 1.5rem;
         }
 
         .result-container {
-            padding-top: 2rem;
-            /* Increase padding to ensure enough space */
+            padding-top: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .result-heading {
+                font-size: 2rem;
+                line-height: 1.5;
+            }
+
+            .result-container {
+                padding-top: 2rem;
+            }
+        }
+
+        .statement {
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .verdict-inaccurate {
+            color: red;
+        }
+
+        .verdict-accurate {
+            color: green;
+        }
+
+        .verdict-other {
+            color: #b9c114;
         }
     </style>
 </head>
 
 <body class="bg-gray-100">
-    <div class="container mx-auto mt-8 px-4">
-        <h1 class="text-3xl font-bold gradient-text result-heading">Here is your result!</h1>
-        <div class="bg-white rounded-lg shadow-md p-6 gradient-border result-container">
-            <!-- Display your fact-checked result here -->
-            <div id="result" class="text-lg text-gray-800"></div>
+    <div class="container mx-auto mt-4 sm:mt-8 px-4">
+        <h1 class="result-heading font-bold gradient-text text-center sm:text-left">Here is your result!</h1>
+        <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 gradient-border result-container">
+            <div id="result" class="text-base sm:text-lg text-gray-800"></div>
         </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const resultText = `{{ query_result|safe }}`; // Ensure Jinja2 output is safe for rendering
+            const resultText = `{{ query_result|safe }}`;
 
-            // Replace "**" with HTML <strong> tags
-            const formattedResult = resultText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            const formattedResult = resultText
+                .replace(/(Statement \d+:.*?)(?=\n|$)/g, '<p class="statement mb-2">$1</p>')
+                .replace(/Verdict:\s*(.*?)(?=\.|$)/g, (match, verdict) => {
+                    let className = '';
+                    const lowerVerdict = verdict.toLowerCase().trim();
 
-            // Split the result into paragraphs based on double line breaks
+                    if (['inaccurate', 'false', '*inaccurate*', '*false*', '**inaccurate**', '**false**'].includes(lowerVerdict)) {
+                        className = 'verdict-inaccurate';
+                    } else if (['accurate', 'true', '*accurate*', '*true*', '**accurate**', '**true**'].includes(lowerVerdict)) {
+                        className = 'verdict-accurate';
+                    } else {
+                        className = 'verdict-other';
+                    }
+
+                    return `<p class="mb-4"><strong>Verdict: <span class="${className}">${verdict}</span></strong></p>`;
+                });
+
+
             const paragraphs = formattedResult.split(/\n\s*\n/);
-
-            // Display each paragraph in a <p> tag
-            const finalResult = paragraphs.map(paragraph => `<p>${paragraph}</p>`).join('');
+            const finalResult = paragraphs.map(paragraph => `<p class="mb-4">${paragraph}</p>`).join('');
 
             document.getElementById('result').innerHTML = finalResult;
         });

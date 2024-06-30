@@ -50,29 +50,44 @@
             transform: translateY(-10px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
         }
+
+        @media (max-width: 768px) {
+            .feature-card:hover {
+                transform: none;
+            }
+
+            .pricing-card:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-white">
     <nav class="w-full flex justify-center py-5 bg-white">
-        <ul class="flex space-x-10">
-            <li><a href="#features" class="text-gray-800 font-bold relative hover-underline">Features</a></li>
-            <li><a href="#mission" class="text-gray-800 font-bold relative hover-underline">Mission</a></li>
-            <li><a href="#pricing" class="text-gray-800 font-bold relative hover-underline">Pricing</a></li>
+        <ul class="flex flex-wrap justify-center space-x-5 sm:space-x-10">
+            <li class="mb-2 sm:mb-0"><a href="#features"
+                    class="text-gray-800 font-bold relative hover-underline">Features</a></li>
+            <li class="mb-2 sm:mb-0"><a href="#mission"
+                    class="text-gray-800 font-bold relative hover-underline">Mission</a></li>
+            <li class="mb-2 sm:mb-0"><a href="#pricing"
+                    class="text-gray-800 font-bold relative hover-underline">Pricing</a></li>
         </ul>
     </nav>
 
-    <div class="flex flex-col justify-center items-center h-screen text-center p-5">
-        <h1 class="text-6xl font-bold text-gray-800 mb-5">Solving the world's biggest problem with <span
+    <div class="flex flex-col justify-center items-center min-h-screen text-center p-5">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-5">Solving the world's biggest problem with <span
                 class="gradient-text">TruthLens</span></h1>
-        <p class="text-xl text-gray-600 mb-5">Your AI-powered companion for accurate and reliable fact-checking.</p>
+        <p class="text-lg md:text-xl text-gray-600 mb-5">Your AI-powered companion for accurate and reliable
+            fact-checking.</p>
         <button onclick="location.href='/fact_check'"
             class="px-5 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors">Get Started</button>
     </div>
 
-    <section id="features" class="flex flex-col justify-center items-center h-screen p-10 bg-white text-center">
-        <h2 class="text-4xl font-bold text-gray-800 mb-10">Features</h2>
-        <div class="grid grid-cols-2 gap-5 w-4/5 max-w-screen-lg">
+    <section id="features"
+        class="flex flex-col justify-center items-center min-h-screen p-5 md:p-10 bg-white text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full md:w-4/5 max-w-screen-lg">
             <div
                 class="bg-white border-4 border-transparent rounded-xl p-10 shadow-md flex flex-col items-center justify-center text-center feature-card">
                 <h3 class="text-2xl font-bold text-gray-800 mb-2">Real-time Fact-checking</h3>
@@ -96,31 +111,33 @@
         </div>
     </section>
 
-    <section id="mission" class="flex items-center h-screen bg-white p-10">
-        <div class="w-1/2 p-5">
-            <h2 class="text-4xl font-bold text-gray-800 mb-5">Our Mission</h2>
-            <p class="text-xl text-gray-600 mb-5">
+    <section id="mission" class="flex flex-col md:flex-row items-center min-h-screen bg-white p-5 md:p-10">
+        <div class="w-full md:w-1/2 p-5 mb-5 md:mb-0">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-5">Our Mission</h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-5">
                 At TruthLens, our mission is to combat misinformation and disinformation. In today's digital age, false
                 information can spread rapidly, causing significant harm to individuals and society. Our AI-powered
                 tools are designed to provide accurate and reliable fact-checking, helping users discern the truth from
                 falsehood.
             </p>
-            <p class="text-xl text-gray-600">
+            <p class="text-lg md:text-xl text-gray-600">
                 According to the World Economic Forum's Global Risk Report, misinformation and disinformation are among
                 the biggest risks facing the world today. We aim to tackle this challenge head-on, empowering users with
                 the information they need to make informed decisions and contribute to a well-informed public discourse.
             </p>
         </div>
-        <div class="w-1/2 p-5 shadow-md">
-            <img src="static/images/risks.jpg" alt="Global Risk Report Graphic">
+        <div class="w-full md:w-1/2 p-5 shadow-md">
+            <img src="static/images/risks.jpg" alt="Global Risk Report Graphic" class="w-full h-auto">
         </div>
     </section>
 
-    <section id="pricing" class="flex flex-col items-center p-10 mt-20 mb-20 bg-white text-center">
-        <h2 class="text-4xl font-bold text-gray-800 mb-5">Transparent Pricing Plans</h2>
-        <p class="text-xl text-gray-600 mb-10">Explore our straightforward pricing plans tailored to meet your
+    <section id="pricing"
+        class="flex flex-col items-center p-5 md:p-10 mt-10 md:mt-20 mb-10 md:mb-20 bg-white text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-5">Transparent Pricing Plans</h2>
+        <p class="text-lg md:text-xl text-gray-600 mb-10">Explore our straightforward pricing plans tailored to meet
+            your
             fact-checking needs. Choose the plan that suits you best.</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-4/5 max-w-screen-lg">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full md:w-4/5 max-w-screen-lg">
             <!-- Free Plan -->
             <div
                 class="bg-white border-2 border-gray-200 rounded-lg p-8 shadow-md flex flex-col items-center pricing-card">
